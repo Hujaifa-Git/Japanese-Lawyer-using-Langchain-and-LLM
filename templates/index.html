@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>NSL JP Lawyer Chatbot</title>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">NSL JP Lawyer</div>
+        <div class="chat-body" id="chat-body"></div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        
+        <script>
+            function handleKeyPress(event) {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            }
+        
+            function sendMessage() {
+                var userInput = document.getElementById('user-input').value;
+                var chatBody = document.getElementById('chat-body');
+        
+                // Display user's message in green
+                
+                chatBody.innerHTML += `<div class="message user-message">${userInput}</div>`;
+        
+                // Send user input to the server (Python function) and receive a response
+                fetch('/send_message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ user_input: userInput }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Display bot's reply in silver
+                    chatBody.innerHTML += `<div class="message bot-message">${data.bot_reply}</div>`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        
+                // Clear the input field
+                document.getElementById('user-input').value = '';
+            }
+        </script>
+</body>
+</html>
