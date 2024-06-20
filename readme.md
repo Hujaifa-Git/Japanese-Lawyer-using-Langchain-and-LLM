@@ -70,15 +70,7 @@ python app.py
 ```
 
 ## Demo
-
-video
-<video src='Demo/NSL_JP_LAWYER.mp4' />
-![Demo Video](Demo/NSL_JP_LAWYER.mp4)
-
-<video width="800" height="360" controls>
-  <source src="Demo/NSL_JP_LAWYER.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
 ![Demo Image](Demo/Scrrensgot_NSL_JP_LAWYER.png)
+
+![Demo](Demo/Japanese_Lawyer.gif)
 
